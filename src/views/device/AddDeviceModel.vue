@@ -14,7 +14,7 @@
     >
       <a-input
         v-decorator="[
-          `propertyNames[${k}]`,
+          `Names[${k}]`,
           {
             validateTrigger: ['change', 'blur'],
             rules: [
@@ -31,7 +31,7 @@
       />
       <a-input
         v-decorator="[
-          `propertyTypes[${k}]`,
+          `Types[${k}]`,
           {
             validateTrigger: ['change', 'blur'],
             rules: [
@@ -48,7 +48,7 @@
       />
       <a-input
         v-decorator="[
-          `propertyValues[${k}]`,
+          `Values[${k}]`,
           {
             validateTrigger: ['change', 'blur'],
             rules: [
@@ -61,6 +61,40 @@
           },
         ]"
         placeholder="属性默认值"
+        style="width: 60%; margin-right: 8px"
+      />
+      <a-input
+        v-decorator="[
+          `Descriptions[${k}]`,
+          {
+            validateTrigger: ['change', 'blur'],
+            rules: [
+              {
+                required: true,
+                whitespace: true,
+                message: '请输入属性的描述',
+              },
+            ],
+          },
+        ]"
+        placeholder="属性描述"
+        style="width: 60%; margin-right: 8px"
+      />
+      <a-input
+        v-decorator="[
+          `AccessModes[${k}]`,
+          {
+            validateTrigger: ['change', 'blur'],
+            rules: [
+              {
+                required: true,
+                whitespace: true,
+                message: '请输入属性的访问权限',
+              },
+            ],
+          },
+        ]"
+        placeholder="属性访问权限（ReadWrite，ReadOnly）"
         style="width: 60%; margin-right: 8px"
       />
       <a-icon
@@ -86,6 +120,7 @@
 
 <script>
 let id = 0
+// import axios from 'axios'
 export default {
   name: 'AddDeviceModel',
   data () {
@@ -119,6 +154,23 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values)
+          const deviceModel = {
+            name: values.name,
+            propertyDtos: [
+
+            ]
+          }
+          console.log(values.Names.length)
+          for (var i = 0; i < values.Values.length; i++) {
+            deviceModel.propertyDtos.push({
+              name: values.Names[i],
+              description: values.Description[i],
+              type: values.Types[i],
+              value: values.Values[i],
+              accessMode: values.AccessMode[i]
+            })
+            console.log(deviceModel.propertyDtos)
+          }
         }
       })
     },

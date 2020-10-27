@@ -98,6 +98,14 @@ const vueConfig = {
         pathRewrite: { '^/api': '' },
         ws: false,
         changeOrigin: true
+      },
+      '/cloud': {
+        target: 'http://182.92.222.53:8250',
+        // target: 'http://127.0.0.1:9527',
+        //target: 'http://192.168.31.226:9527',
+        pathRewrite: { '^/cloud': '' },
+        ws: false,
+        changeOrigin: true
       }
     }
   },
