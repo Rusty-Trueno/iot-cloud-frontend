@@ -119,8 +119,8 @@
 </template>
 
 <script>
+import axios from 'axios'
 let id = 0
-// import axios from 'axios'
 export default {
   name: 'AddDeviceModel',
   data () {
@@ -156,21 +156,24 @@ export default {
           console.log('Received values of form: ', values)
           const deviceModel = {
             name: values.name,
-            propertyDtos: [
-
-            ]
+            propertyDtos: []
           }
-          console.log(values.Names.length)
-          for (var i = 0; i < values.Values.length; i++) {
+          for (var i = 0; i < values.Names.length; i++) {
             deviceModel.propertyDtos.push({
               name: values.Names[i],
-              description: values.Description[i],
-              type: values.Types[i],
               value: values.Values[i],
-              accessMode: values.AccessMode[i]
+              description: values.Descriptions[i],
+              accessMode: values.AccessModes[i],
+              type: values.Types[i]
             })
-            console.log(deviceModel.propertyDtos)
           }
+
+          axios.post('/cloud/model/addDeviceModel', deviceModel).then((res) => {
+            alert('设备模型创建成功')
+          }).catch((res) => {
+            alert('设备模型创建失败')
+          })
+          console.log(deviceModel)
         }
       })
     },
