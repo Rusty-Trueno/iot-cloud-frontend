@@ -6,7 +6,7 @@
             <img
               slot="cover"
               alt="example"
-              src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+              src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603900564400&di=0ecfb4221f92e5f9fb45c713eff7ef73&imgtype=0&src=http%3A%2F%2Fuploadimg2.moore.live%2Fimages%2Fnews%2F2018-11-21%2F060155.jpg"
             />
             <template slot="actions" class="ant-card-actions">
               <a-button type="primary" ghost>
