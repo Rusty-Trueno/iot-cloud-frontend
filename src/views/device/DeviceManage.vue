@@ -9,7 +9,7 @@
               src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603900564400&di=0ecfb4221f92e5f9fb45c713eff7ef73&imgtype=0&src=http%3A%2F%2Fuploadimg2.moore.live%2Fimages%2Fnews%2F2018-11-21%2F060155.jpg"
             />
             <template slot="actions" class="ant-card-actions">
-              <a-button type="primary" ghost>
+              <a-button type="primary" ghost @click="handleDeviceCheck(device)">
                 查看设备数据
               </a-button>
             </template>
@@ -41,6 +41,17 @@ export default {
     }).catch((res) => {
       console.log(res)
     })
+  },
+  methods: {
+    handleDeviceCheck (e) {
+      const deviceName = e.deviceName
+      axios.get('/cloud/device/getDeviceData?deviceName=' + deviceName).then((res) => {
+        alert(JSON.stringify(res.data))
+      }).catch((res) => {
+        console.log(res)
+        alert('查询失败！')
+      })
+    }
   }
 }
 </script>
