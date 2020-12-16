@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { addDeviceModel } from '@/api/device'
 let id = 0
 export default {
   name: 'AddDeviceModel',
@@ -168,9 +168,11 @@ export default {
             })
           }
 
-          axios.post('/cloud/model/addDeviceModel', deviceModel).then((res) => {
+          addDeviceModel(deviceModel).then(res => {
+            console.log(res)
             alert('设备模型创建成功')
-          }).catch((res) => {
+          }).catch(res => {
+            console.log(res)
             alert('设备模型创建失败')
           })
           console.log(deviceModel)

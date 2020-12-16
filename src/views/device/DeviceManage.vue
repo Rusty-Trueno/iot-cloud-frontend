@@ -27,6 +27,8 @@
 
 <script>
 import axios from 'axios'
+import { getAllEdgeDevice } from '@/api/device'
+
 export default {
   name: 'DeviceManage',
   data () {
@@ -35,17 +37,16 @@ export default {
     }
   },
   created () {
-    axios.get('/cloud/device/getAllEdgeDevice').then((res) => {
-      this.deviceList = res.data
-      console.log(this.deviceList)
-    }).catch((res) => {
+    getAllEdgeDevice().then(res => {
       console.log(res)
+      this.deviceList = res
+      console.log(this.deviceList)
     })
   },
   methods: {
     handleDeviceCheck (e) {
       const deviceName = e.deviceName
-      axios.get('/cloud/device/getDeviceData?deviceName=' + deviceName).then((res) => {
+      axios.get('/api/device/getDeviceData?deviceName=' + deviceName).then((res) => {
         alert(JSON.stringify(res.data))
       }).catch((res) => {
         console.log(res)

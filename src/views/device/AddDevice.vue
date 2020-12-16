@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { addEdgeDevice, getAllEdgeDeviceModel } from '@/api/device'
 export default {
   name: 'AddDevice',
   data () {
@@ -55,10 +55,10 @@ export default {
     this.form.getFieldDecorator('keys', { initialValue: [], preserve: true })
   },
   created () {
-    axios.get('/cloud/model/getAllEdgeDeviceModel').then((res) => {
-      this.deviceModelList = res.data
+    getAllEdgeDeviceModel().then(res => {
+      this.deviceModelList = res
       console.log(this.deviceModelList)
-    }).catch((res) => {
+    }).catch(res => {
       console.log(res)
     })
   },
@@ -100,10 +100,11 @@ export default {
       console.log(this.selectedProperties)
     },
     createDevice (device) {
-      console.log(device)
-      axios.post('/cloud/device/addDevice', device).then((res) => {
+      addEdgeDevice(device).then(res => {
+        console.log(res)
         alert('设备创建成功')
-      }).catch((res) => {
+      }).catch(res => {
+        console.log(res)
         alert('设备创建失败')
       })
     }
